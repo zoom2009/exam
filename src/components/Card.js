@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Progress } from 'reactstrap';
-import { IoIosClose } from "react-icons/io";
 import { COLORS } from '../App';
 
 
@@ -30,7 +29,7 @@ export default class Card extends Component {
         </div>
          { isAdd==true &&
             <div
-              className="button-hover"
+              className="button-hover sub-font"
               onClick={()=>fnAdd(index)} 
               style={{cursor: 'pointer', position: 'absolute', top: 0, right: 0, padding: 10, color: 'red'}}>
               Add
@@ -39,12 +38,10 @@ export default class Card extends Component {
           {
             isRemove &&
             <div
-              className="button-hover"
+              className="button-hover sub-font"
               onClick={()=>fnRemove(index)} 
               style={{cursor: 'pointer', position: 'absolute', top: 0, right: 0, padding: 10, color: 'red'}}>
-              <IoIosClose 
-                size={30}
-                />
+              <p>X</p>
             </div>
           }
       </div>
