@@ -18,7 +18,9 @@ export const COLORS = {
   Darkness: "#574b90",
   Colorless: "#FFF",
   Fire: "#eb4d4b",
-  BottomBarBackground: '#ec5655'
+  BottomBarBackground: '#ec5655',
+  CardBackground: '#f3f4f7',
+  ProcessColor: '#f3701a'
 }
 
 const customStyles = {
