@@ -12,7 +12,7 @@ export default class Card extends Component {
     console.log('is index')
     return (
       <div className="" style={{position: 'relative', padding: 5}}>
-        <div style={{backgroundColor: COLORS.CardBackground}} className="d-flex card-hover">
+        <div style={{backgroundColor: COLORS.CardBackground,}} className="d-flex card-hover">
             <img style={{height: 200}} className="img-thumbnail" src={src} alt="ss"/>
             <div className="col-8">
                 <p>{name}</p>
@@ -39,6 +39,7 @@ export default class Card extends Component {
           {
             isRemove &&
             <div
+              className="button-hover"
               onClick={()=>fnRemove(index)} 
               style={{cursor: 'pointer', position: 'absolute', top: 0, right: 0, padding: 10, color: 'red'}}>
               <IoIosClose 

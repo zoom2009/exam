@@ -31,7 +31,8 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    width: 500, height: 500
+    width: 500, height: 500,
+    fontFamily:  'Gaegu'
   }
 };
 
@@ -80,7 +81,7 @@ class App extends Component {
     let {cardAllList,curCardList, ready} = this.state
     if(ready) {
       return (
-        <div style={{fontFamily: 'Gaegu'}} id="myApp" className="App">
+        <div style={{}} id="myApp" className="App main-font">
           <ShowCurList 
             // cardAllList={this.state.curCardList}
             />
