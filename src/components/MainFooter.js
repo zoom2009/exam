@@ -17,7 +17,7 @@ export default class MainFooter extends Component {
             <div>
                 <FaPlus
                     onClick={this.props.Method}
-                    containerStyle={{marginBottom: 20}}
+                    // containerStyle={{marginBottom: 20}}
                     style={{backgroundColor: COLORS.BottomBarBackground, borderRadius: '100%', padding: 30, marginTop: -50, cursor: 'pointer'}} 
                     color={'white'}
                     size={100}
