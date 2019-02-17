@@ -21,7 +21,7 @@ export default class Card extends Component {
                 <div>
                   {
                     happy.map((e, i) => (
-                      <img key={i} style={{width: 50, height: 50}} src={require('../cute.png')} />
+                      <img key={i} style={{width: 25, height: 25}} src={require('../cute.png')} />
                     ))
                   }
                 </div>
