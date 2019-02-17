@@ -71,10 +71,13 @@ class App extends Component {
   }
 
   render() {
+    // font-family: 'Gaegu', cursive;
+    // font-family: 'Atma', cursive;
+
     let {cardAllList,curCardList, ready} = this.state
     if(ready) {
       return (
-        <div id="myApp" className="App">
+        <div style={{fontFamily: 'Gaegu'}} id="myApp" className="App">
           <ShowCurList 
             // cardAllList={this.state.curCardList}
             />
