@@ -17,7 +17,8 @@ export const COLORS = {
   Lightning: "#f9ca24",
   Darkness: "#574b90",
   Colorless: "#FFF",
-  Fire: "#eb4d4b"
+  Fire: "#eb4d4b",
+  BottomBarBackground: '#ec5655'
 }
 
 const customStyles = {
