@@ -16,9 +16,9 @@ export default class Card extends Component {
             <img style={{height: 200}} className="img-thumbnail" src={src} alt="ss"/>
             <div className="col-8">
                 <p>{name}</p>
-                <div className="d-flex">HP<Progress color='warning' style={{ marginLeft: 35, width: '70%', marginTop: 4}} value={hp} /></div>
-                <div className="d-flex">STR <Progress color='warning' style={{marginLeft: 25, width: '70%', marginTop: 4}} value={str} /></div>
-                <div className="d-flex">WEAK <Progress color='warning' style={{marginLeft: 10, width: '70%', marginTop: 4}} value={weak} /></div>
+                <div className="d-flex sub-font">HP<Progress color='warning' style={{ marginLeft: 35, width: '70%', marginTop: 4}} value={hp} /></div>
+                <div className="d-flex sub-font">STR <Progress color='warning' style={{marginLeft: 25, width: '70%', marginTop: 4}} value={str} /></div>
+                <div className="d-flex sub-font">WEAK <Progress color='warning' style={{marginLeft: 10, width: '70%', marginTop: 4}} value={weak} /></div>
                 <div>
                   {
                     happy.map((e, i) => (
