@@ -13,19 +13,21 @@ class card_list {
     }
 
     removeList(index) {
-        let temp = []
-        console.log('sss')
+        // console.log('listALl is ', this.listAll)
+        console.log('index is ', index)
+        let t = []
         for(let i=0;i<this.curList.length;i++) {
-            if(i===index) {
-                console.log('found')
-            }else {
-                console.log('is push', i)
-                temp.push(this.curList[i])
+            if(i!==index) {
+                t.push(this.curList[i])
             }
         }
-        this.setList(temp)
+
+        this.curList = JSON.parse(JSON.stringify(t))
     }
 
+    setCurList(s) {
+
+    }
 
     get getCurList() {
         return this.curList
@@ -36,6 +38,7 @@ decorate(card_list, {
     listAll: observable,
     curList: observable,
 
+    setList: action,
     init: action,
     addList: action,
     removeList: action,

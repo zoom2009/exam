@@ -25,7 +25,8 @@ class ShowCurList extends Component {
                   key={i} 
                   md={6}>
                   <Card 
-                    fnRemove={(i)=>ListStore.removeList(i)}
+                    index={i}
+                    fnRemove={(index)=>ListStore.removeList(index)}
                     isRemove={true}
                     isAdd={false}
                     src={e.imageUrl}
