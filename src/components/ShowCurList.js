@@ -41,7 +41,6 @@ class ShowCurList extends Component {
 
             return (
                 <Col
-                  style={{overflow: 'scroll'}}
                   key={i} 
                   md={6}>
                   <Card 
