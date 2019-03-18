@@ -16,7 +16,7 @@ class ShowCurList extends Component {
   
   render() {
     return (
-        <Row>
+        <Row style={{maxHeight: 660, overflow: 'scroll'}}>
         {
           ListStore.getCurList.map((e, i) => {
             let dmg

@@ -49,7 +49,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(()=>Modal.setAppElement('#myApp'), 1000)
+    setTimeout(()=>Modal.setAppElement('#myApp'), 200)
     this.getAllList()
     this.setState({ready: true})
   }
@@ -81,10 +81,8 @@ class App extends Component {
     let {cardAllList,curCardList, ready} = this.state
     if(ready) {
       return (
-        <div style={{}} id="myApp" className="App main-font">
-          <ShowCurList 
-            // cardAllList={this.state.curCardList}
-            />
+        <div style={{height: 200}} id="myApp" className="App main-font">
+          <ShowCurList />
 
           <MainFooter 
             Method={()=>this.setState({modalIsOpen: true})}
@@ -100,8 +98,6 @@ class App extends Component {
               allCardList={cardAllList}
               />
           </Modal>
-
-         
         </div>
       )
     }else {
