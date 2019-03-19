@@ -58,10 +58,6 @@ class App extends Component {
     return fetch('http://localhost:3030/api/cards')
       .then((response) => response.json())
       .then((responseJson) => {
-        // console.log('res : ', response)
-        // console.log('res2 : ', responseJson)
-        console.log(responseJson.cards[0])
-        // return responseJson.movies;
         this.setState({cardAllList: responseJson.cards})
         ListStore.init(responseJson.cards)
       })
