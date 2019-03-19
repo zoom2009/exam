@@ -3,17 +3,17 @@ import { shallow, mount, render } from 'enzyme';
 import {connect, Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {expect} from 'chai'
-import App from './App'
-import ShowCurList from './components/ShowCurList';
-import MainFooter from './components/MainFooter';
-import ModalComponent from './components/ModalComponent';
-import CardList from '../src/mock/cardList'
+import App from '../App'
+import ShowCurList from '../components/ShowCurList';
+import MainFooter from '../components/MainFooter';
+import ModalComponent from '../components/ModalComponent';
+import CardList from '../mock/cardList'
 import Modal from 'react-modal';
 import { FaPlus } from "react-icons/fa";
-import ListStore from './Mobx/ListStore'
-import Card from './components/Card';
+import ListStore from '../Mobx/ListStore'
+import Card from '../components/Card';
 import {Input} from 'reactstrap'
-import reducer from './Redux/index'
+import reducer from '../Redux/index'
 
 const store = createStore(reducer)
 
@@ -76,6 +76,18 @@ describe('<App />', () => {
         )
         wrapper.find(FaPlus).simulate('click')
         expect(wrapper.find(Modal).props().isOpen).to.equal(true)
+    })
+    it('will call function when click open modal <Mock FN>', () => {
+        let mockFn = jest.fn()
+        let onClickMock = jest.fn(() => {
+            mockFn()
+        })
+        let wrapper = mount(
+            <FaPlus onClick={onClickMock}/>
+        )
+        wrapper.find(FaPlus).simulate('click')
+        expect(mockFn.mock.calls.length).to.equal(1)
+        // console.log('call :', mockFn.should.have.been.called())
     })
     // // List
     it('currrent card on mobx & screen is 0', () => {

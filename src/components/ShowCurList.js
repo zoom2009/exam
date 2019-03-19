@@ -52,7 +52,7 @@ class ShowCurList extends Component {
                   <Card 
                     index={i}
                     // Mobx
-                    fnRemove={(index)=>ListStore.removeList(index)}
+                    // fnRemove={(index)=>ListStore.removeList(index)}
                     // Redus
                     fnRemove={(index)=>this.props.removeList(index)}
                     isRemove={true}
