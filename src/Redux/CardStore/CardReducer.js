@@ -13,7 +13,7 @@ export default (state = CardInitState, action) => {
                 listAll: newList,
                 curList: [...state.curList, state.listAll[action.payload]]
             }
-            console.log('state new : ', state)
+            // console.log('state new : ', state)
             break
         case removeList :
             let newList2 = [...state.listAll, state.curList[action.payload]]

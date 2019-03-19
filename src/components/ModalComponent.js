@@ -20,7 +20,7 @@ class ModalComponent extends Component {
   
   render() {
     let {allCardList} = this.props
-    console.log('sss', this.props.card.listAll)
+    // console.log('sss', this.props.card.listAll)
     return (
       <div>
         <div style={{position: 'relative'}}>
@@ -35,7 +35,7 @@ class ModalComponent extends Component {
             this.props.card.listAll.map((e, i) => {
             // Mobx
             // ListStore.getAllList.map((e, i) => {
-                console.log('name : ', e.name)
+                // console.log('name : ', e.name)
                 if(e.name.indexOf(this.state.searchText)!==-1) {
                   let dmg
                   let happy = 0
@@ -59,7 +59,7 @@ class ModalComponent extends Component {
                           // Mobx
                           ListStore.addList(i)
                           // Redux
-                          console.log(this.props.addList)
+                          // console.log(this.props.addList)
                           this.props.addList(i)
                           }
                         }

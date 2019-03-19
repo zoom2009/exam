@@ -55,7 +55,7 @@ class App extends Component {
     this.getAllList()
     this.setState({ready: true})
 
-    console.log('Redux : ', this.props.card.listAll)
+    // console.log('Redux : ', this.props.card.listAll)
   }
 
   getAllList() {
@@ -67,7 +67,7 @@ class App extends Component {
         ListStore.init(responseJson.cards)
         // --- Redux ---
         this.props.setAllList(responseJson.cards)
-        console.log('After set redux : ', this.props.card.listAll)
+        // console.log('After set redux : ', this.props.card.listAll)
       })
       .catch((error) => {
         // console.error(error);

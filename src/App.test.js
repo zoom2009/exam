@@ -1,5 +1,7 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, render } from 'enzyme';
+import {connect, Provider} from 'react-redux'
+import {createStore} from 'redux'
 import {expect} from 'chai'
 import App from './App'
 import ShowCurList from './components/ShowCurList';
@@ -11,26 +13,43 @@ import { FaPlus } from "react-icons/fa";
 import ListStore from './Mobx/ListStore'
 import Card from './components/Card';
 import {Input} from 'reactstrap'
+import reducer from './Redux/index'
+
+const store = createStore(reducer)
 
 describe('<App />', () => {
     // Is render
     it('is render ShowCurList component', () => {
-        let wrapper = shallow(<App />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         expect(wrapper.find(ShowCurList)).to.have.lengthOf(1)
     })
     it('is render MainFooter', () => {
-        let wrapper = shallow(<App />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         expect(wrapper.find(MainFooter)).to.have.lengthOf(1)
     })
-    it('is render ModalComponent', () => {
-        let wrapper = shallow(<App />)
-        expect(wrapper.find(ModalComponent)).to.have.lengthOf(1)
-    })
+    // it('is render ModalComponent', () => {
+    //     let wrapper = mount(
+    //         <Modal />
+    //     )
+    //     expect(wrapper.find(ModalComponent)).to.have.lengthOf(1)
+    // })
     it('it have modal', () => {
-        let wrapper = mount(<App />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         expect(wrapper.find(Modal)).to.have.lengthOf(1)
     })
-    // Fetch data
+    // // Fetch data
     it('should get some result from fetch', async() => {
         let response = await CardList.all()
         // console.warn(response)
@@ -40,32 +59,55 @@ describe('<App />', () => {
         let response = await CardList.all()
         expect(response.cards.length).to.be.equal(20)
     })
-    // Action
+    // // Action
     it('modal not popup if not click', () => {
-        let wrapper = shallow(<App />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         expect(wrapper.find(Modal).props().isOpen).to.equal(false)
     })
     it('modal will popup when click + button', () => {
-        let wrapper = mount(<App />) // FaPlus is child of child in App that why using mount 
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         wrapper.find(FaPlus).simulate('click')
         expect(wrapper.find(Modal).props().isOpen).to.equal(true)
     })
-    // List
+    // // List
     it('currrent card on mobx & screen is 0', () => {
-        expect(ListStore.getCurList.length).to.equal(0)
-        let wrapper = mount(<ShowCurList />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
+        // console.log('warapper props : ', wrapper.props().store.getState().card.curList.length)
+        expect(wrapper.props().store.getState().card.curList.length).to.equal(0)
+        // let wrapper = mount(<ShowCurList />)
         expect(wrapper.find(Card).length).to.equal(0)
     })
     it('add card then have +1 from current card on mobx & screen', () => {
-        let wrapper = mount(<App />)
+        let wrapper = mount(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         // add card
         wrapper.find(FaPlus).simulate('click')
         wrapper.find('.add-card').first().simulate('click')
-        expect(ListStore.getCurList.length).to.equal(1)
+        expect(wrapper.props().store.getState().card.curList.length).to.equal(1)
 
         wrapper.find('.add-card').first().simulate('click')
-        expect(ListStore.getCurList.length).to.equal(2)
-        let wrapper2 = mount(<ShowCurList />)
+        expect(wrapper.props().store.getState().card.curList.length).to.equal(2)
+        
+        let wrapper2 = mount(
+            <Provider store={store}>
+                <ShowCurList />
+            </Provider>
+        )
         expect(wrapper2.find(Card).length).to.equal(2)
     })
 })
@@ -73,19 +115,31 @@ describe('<App />', () => {
 describe('<ShowCurList />', () => {
     it('remove card then -1 from current card on mobx & screen', () => {
         // remove card        
-        let wrapper = mount(<ShowCurList />)
-        let curLen = ListStore.getCurList.length
+        let wrapper = mount(
+            <Provider store={store}>
+                <ShowCurList />
+            </Provider>
+        )
+        let curLen = wrapper.props().store.getState().card.curList.length
         wrapper.find('.remove-card').first().simulate('click')
-        expect(ListStore.getCurList.length).to.equal(curLen-1)
+        expect(wrapper.props().store.getState().card.curList.length).to.equal(curLen-1)
         expect(wrapper.find(Card).length).to.equal(curLen-1)
     })
 })
 
 describe('<Modal />', () => {
     it('search `Windstorm` will get 1 result', () => {
-        let wrapper = shallow(<App />)
+        let wrapper = shallow(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
         wrapper.setState({modalIsOpen: true})
-        let wrapper2 = mount(<ModalComponent />)
+        let wrapper2 = mount(
+            <Provider store={store}>
+                <ModalComponent />
+            </Provider>
+        )
         let input = wrapper2.find(Input)
 
         input.simulate('focus')
@@ -94,7 +148,11 @@ describe('<Modal />', () => {
         expect(cardsLen).to.equal(1)
     })
     it('search `u` will get only card have alphabet `u`', () => {
-        let wrapper2 = mount(<ModalComponent />)
+        let wrapper2 = mount(
+            <Provider store={store}>
+                <ModalComponent />
+            </Provider>
+        )
         let input = wrapper2.find(Input)
 
         input.simulate('focus')
