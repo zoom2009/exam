@@ -4,6 +4,9 @@ import Card from './Card';
 import {observer} from 'mobx-react'
 import ListStore from '../Mobx/ListStore'
 
+import {connect} from 'react-redux'
+import {RemoveList} from '../Redux/CardStore/CardAction'
+
 class ShowCurList extends Component {
   
   constructor(props) {
@@ -18,7 +21,10 @@ class ShowCurList extends Component {
     return (
         <Row style={{maxHeight: 660, overflowY: 'scroll', overflowX: 'hidden'}}>
         {
-          ListStore.getCurList.map((e, i) => {
+          // Redux
+          this.props.card.curList.map((e, i) => {
+          // Mobx
+          // ListStore.getCurList.map((e, i) => {
             let dmg
             let happy = 0
             let weak = e.convertedRetreatCost * 100> 100 ? 0 : e.convertedRetreatCost * 100
@@ -45,7 +51,10 @@ class ShowCurList extends Component {
                   md={6}>
                   <Card 
                     index={i}
+                    // Mobx
                     fnRemove={(index)=>ListStore.removeList(index)}
+                    // Redus
+                    fnRemove={(index)=>this.props.removeList(index)}
                     isRemove={true}
                     isAdd={false}
                     src={e.imageUrl}
@@ -64,5 +73,16 @@ class ShowCurList extends Component {
   }
 }
 
+// Mobx
+// export default observer(ShowCurList)
 
-export default observer(ShowCurList)
+// Redux
+const mapStateToProps = (state) => ({
+  card: state.card
+})
+
+const mapDispatchToProps = dispatch => ({
+  removeList: payload => dispatch(RemoveList(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowCurList)

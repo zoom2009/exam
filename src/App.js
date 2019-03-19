@@ -5,6 +5,8 @@ import ShowCurList from './components/ShowCurList';
 import Modal from 'react-modal';
 import ModalComponent from './components/ModalComponent';
 import ListStore from './Mobx/ListStore'
+import {connect} from 'react-redux'
+import {SetAllList} from './Redux/CardStore/CardAction'
 
 export const COLORS = {
   Psychic: "#f8a5c2",
@@ -52,14 +54,20 @@ class App extends Component {
     setTimeout(()=>Modal.setAppElement('#myApp'), 200)
     this.getAllList()
     this.setState({ready: true})
+
+    console.log('Redux : ', this.props.card.listAll)
   }
 
   getAllList() {
     return fetch('http://localhost:3030/api/cards')
       .then((response) => response.json())
       .then((responseJson) => {
+        // --- Mobx ---
         this.setState({cardAllList: responseJson.cards})
         ListStore.init(responseJson.cards)
+        // --- Redux ---
+        this.props.setAllList(responseJson.cards)
+        console.log('After set redux : ', this.props.card.listAll)
       })
       .catch((error) => {
         // console.error(error);
@@ -106,4 +114,13 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  card: state.card
+})
+
+const mapDispatchToProps = dispatch => ({
+  setAllList: payload => dispatch(SetAllList(payload))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
