@@ -8,7 +8,7 @@ export default class Card extends Component {
     let {src, name, hp, str, weak, isAdd, isRemove, fnAdd, fnRemove, index, happy} = this.props
 
    
-    console.log('is index')
+    // console.log('is index')
     return (
       <div className="" style={{position: 'relative', padding: 5}}>
         <div style={{backgroundColor: COLORS.CardBackground,}} className="d-flex card-hover">
@@ -29,7 +29,7 @@ export default class Card extends Component {
         </div>
          { isAdd==true &&
             <div
-              className="button-hover sub-font"
+              className="button-hover sub-font add-card"
               onClick={()=>fnAdd(index)} 
               style={{cursor: 'pointer', position: 'absolute', top: 0, right: 0, padding: 10, color: 'red'}}>
               Add
@@ -38,7 +38,7 @@ export default class Card extends Component {
           {
             isRemove &&
             <div
-              className="button-hover sub-font"
+              className="button-hover sub-font remove-card"
               onClick={()=>fnRemove(index)} 
               style={{cursor: 'pointer', position: 'absolute', top: 0, right: 0, padding: 10, color: 'red'}}>
               <p>X</p>

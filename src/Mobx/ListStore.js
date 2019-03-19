@@ -21,7 +21,7 @@ class card_list {
 
     removeList(index) {
         // console.log('listALl is ', this.listAll)
-        console.log('index is ', index)
+        // console.log('index is ', index)
         this.listAll.push(this.curList[index])
         let t = []
         for(let i=0;i<this.curList.length;i++) {

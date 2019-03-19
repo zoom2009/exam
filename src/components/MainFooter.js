@@ -16,12 +16,13 @@ export default class MainFooter extends Component {
         <center>
             <div>
                 <FaPlus
-                    onClick={this.props.Method}
-                    // containerStyle={{marginBottom: 20}}
-                    style={{backgroundColor: COLORS.BottomBarBackground, borderRadius: '100%', padding: 30, marginTop: -50, cursor: 'pointer'}} 
-                    color={'white'}
-                    size={100}
-                    />
+                  id="buttonAdd"
+                  onClick={this.props.Method}
+                  // containerStyle={{marginBottom: 20}}
+                  style={{backgroundColor: COLORS.BottomBarBackground, borderRadius: '100%', padding: 30, marginTop: -50, cursor: 'pointer'}} 
+                  color={'white'}
+                  size={100}
+                  />
             </div>
         </center>
       </div>

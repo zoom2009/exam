@@ -62,7 +62,7 @@ class App extends Component {
         ListStore.init(responseJson.cards)
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
   }
 
@@ -85,6 +85,7 @@ class App extends Component {
             />
 
           <Modal
+            ariaHideApp={false}
             isOpen={this.state.modalIsOpen}
             style={customStyles}
             onRequestClose={this.closeModal}
