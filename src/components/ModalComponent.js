@@ -21,6 +21,7 @@ class ModalComponent extends Component {
       <div>
         <div style={{position: 'relative'}}>
           <Input 
+            id="search-poke"
             value={this.state.searchText} 
             onChange={(e)=>this.setState({searchText: e.target.value})} 
             placeholder='find pokemon' 
@@ -61,7 +62,7 @@ class ModalComponent extends Component {
                             />
                     )
                 }else {
-                    return <div></div>
+                    return <div key={i}></div>
                 }
             })
           }

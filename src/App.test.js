@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 import { FaPlus } from "react-icons/fa";
 import ListStore from './Mobx/ListStore'
 import Card from './components/Card';
+import {Input} from 'reactstrap'
 
 describe('<App />', () => {
     // Is render
@@ -81,5 +82,31 @@ describe('<ShowCurList />', () => {
 })
 
 describe('<Modal />', () => {
-    
+    it('search `Windstorm` will get 1 result', () => {
+        let wrapper = shallow(<App />)
+        wrapper.setState({modalIsOpen: true})
+        let wrapper2 = mount(<ModalComponent />)
+        let input = wrapper2.find(Input)
+
+        input.simulate('focus')
+        input.simulate('change', {target: {value: 'Windstorm'}})
+        let cardsLen = wrapper2.find(Card).length
+        expect(cardsLen).to.equal(1)
+    })
+    it('search `u` will get only card have alphabet `u`', () => {
+        let wrapper2 = mount(<ModalComponent />)
+        let input = wrapper2.find(Input)
+
+        input.simulate('focus')
+        input.simulate('change', {target: {value: 'u'}})
+        let cards = wrapper2.find(Card)
+
+        let status = true
+        cards.forEach(e => {
+            let n = e.props().name
+            if(n.indexOf('u')===-1) status = false
+        })
+
+        expect(status).to.equal(true)
+    })
 })

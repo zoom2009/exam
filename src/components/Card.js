@@ -10,7 +10,7 @@ export default class Card extends Component {
    
     // console.log('is index')
     return (
-      <div className="" style={{position: 'relative', padding: 5}}>
+      <div className="card-item" style={{position: 'relative', padding: 5}}>
         <div style={{backgroundColor: COLORS.CardBackground,}} className="d-flex card-hover">
             <img style={{height: 200}} className="img-thumbnail" src={src} alt="ss"/>
             <div className="col-8">
