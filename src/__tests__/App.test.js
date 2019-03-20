@@ -15,7 +15,9 @@ import Card from '../components/Card';
 import {Input} from 'reactstrap'
 import reducer from '../Redux/index'
 
-const store = createStore(reducer)
+export const store = createStore(reducer)
+
+// import {store} from '../index'
 
 describe('<App />', () => {
     // Is render
@@ -90,7 +92,7 @@ describe('<App />', () => {
         // console.log('call :', mockFn.should.have.been.called())
     })
     // // List
-    it('currrent card on mobx & screen is 0', () => {
+    it('currrent card on redux & screen is 0', () => {
         let wrapper = mount(
             <Provider store={store}>
                 <App />
@@ -101,7 +103,7 @@ describe('<App />', () => {
         // let wrapper = mount(<ShowCurList />)
         expect(wrapper.find(Card).length).to.equal(0)
     })
-    it('add card then have +1 from current card on mobx & screen', () => {
+    it('add card then have +1 from current card on redux & screen', () => {
         let wrapper = mount(
             <Provider store={store}>
                 <App />
@@ -125,7 +127,7 @@ describe('<App />', () => {
 })
 
 describe('<ShowCurList />', () => {
-    it('remove card then -1 from current card on mobx & screen', () => {
+    it('remove card then -1 from current card on redux & screen', () => {
         // remove card        
         let wrapper = mount(
             <Provider store={store}>

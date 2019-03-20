@@ -25,25 +25,30 @@ class ShowCurList extends Component {
           this.props.card.curList.map((e, i) => {
           // Mobx
           // ListStore.getCurList.map((e, i) => {
-            let dmg
-            let happy = 0
-            let weak = e.convertedRetreatCost * 100> 100 ? 0 : e.convertedRetreatCost * 100
-            // console.log(e.attacks[0].damage)
+            let atk = 0
             if(e.attacks) {
-              // console.log('e.attacks[0].damage', e.attacks[0].damage)
-              dmg = +(e.attacks[0].damage.substring(0, e.attacks[0].damage.length - 1))
-              // console.log('dd', dmg)
-              happy = ((e.hp/10) + (dmg/10) + 10 - (weak) ) / 5
-              // console.log('happ: ', happy)
-              // Happiness level calculation ((hp / 10) + (damage /10 ) + 10 - (weak)) / 5
+              e.attacks.forEach(a => {
+                if(isNaN(a.damage)) {
+                  atk+=(+(a.damage.substring(0, a.damage.length-1)))
+                }
+              })
             }
-            
-            // let happy = 5
+            let hp = e.hp > 100 ? 100 : e.hp
+            let weak = e.weaknesses? (e.weaknesses.length/e.attacks.length) : 0
+            let data = {
+              name: e.name,
+              hp,
+              str: e.convertedRetreatCost * 50 > 100 ? 100 : e.convertedRetreatCost * 50,
+              atk,
+              weak : weak*100,
+              level: ((hp/10)+(atk/10)+10-weak)/5
+            }
+            // console.log('data :', data)
+
             let dHappy = []
-            for(let i=0;i<happy;i++) {
+            for(let i=0;i<data.level;i++) {
               dHappy.push(i)
             }
-            // Happiness level calculation ((hp / 10) + (damage /10 ) + 10 - (weak)) / 5
 
             return (
                 <Col
@@ -58,10 +63,10 @@ class ShowCurList extends Component {
                     isRemove={true}
                     isAdd={false}
                     src={e.imageUrl}
-                    name={e.name}
-                    hp={e.hp > 100 ? 100: e.hp}
-                    str={e.convertedRetreatCost * 50 > 100 ? 0 : e.convertedRetreatCost * 50}
-                    weak={e.convertedRetreatCost * 100> 100 ? 0 : e.convertedRetreatCost * 100}
+                    name={data.name}
+                    hp={data.hp}
+                    str={data.str}
+                    weak={data.weak}
                     happy={dHappy}
                     />
                 </Col>

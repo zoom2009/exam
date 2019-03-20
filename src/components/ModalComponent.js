@@ -35,21 +35,29 @@ class ModalComponent extends Component {
             this.props.card.listAll.map((e, i) => {
             // Mobx
             // ListStore.getAllList.map((e, i) => {
-                // console.log('name : ', e.name)
-                if(e.name.indexOf(this.state.searchText)!==-1) {
-                  let dmg
-                  let happy = 0
-                  let weak = e.convertedRetreatCost * 100> 100 ? 0 : e.convertedRetreatCost * 100
-                  if(e.attacks) {
-                    if(e.attacks && e.attacks.length>0 && e.attacks[0].damage) {
-                      dmg = +(e.attacks[0].damage.substring(0, e.attacks[0].damage.length - 1))
-                      // console.log(e.attacks[0].damage)
-                      happy = ((e.hp/10) + (dmg/10) + 10 - (weak) ) / 5
+                let atk = 0
+                if(e.attacks) {
+                  e.attacks.forEach(a => {
+                    if(isNaN(a.damage)) {
+                      atk+=(+(a.damage.substring(0, a.damage.length-1)))
                     }
+                  })
                 }
+                let hp = e.hp > 100 ? 100 : e.hp
+                let weak = e.weaknesses? (e.weaknesses.length/e.attacks.length) : 0
+                let data = {
+                  name: e.name,
+                  hp,
+                  str: e.convertedRetreatCost * 50 > 100 ? 100 : e.convertedRetreatCost * 50,
+                  atk,
+                  weak : weak*100,
+                  level: ((hp/10)+(atk/10)+10-weak)/5
+                }
+
+                if(e.name.indexOf(this.state.searchText)!==-1) {
                   // let happy = 5
                   let dHappy = []
-                  for(let i=0;i<happy;i++) {
+                  for(let i=0;i<data.level;i++) {
                     dHappy.push(i)
                   }
                     return (
@@ -67,10 +75,10 @@ class ModalComponent extends Component {
                         isRemove={false}
                         isAdd={true}
                         src={e.imageUrl}
-                        name={e.name}
-                        hp={e.hp > 100 ? 100: e.hp}
-                        str={e.convertedRetreatCost * 50 > 100 ? 0 : e.convertedRetreatCost * 50}
-                        weak={e.convertedRetreatCost * 100> 100 ? 0 : e.convertedRetreatCost * 100}
+                        name={data.name}
+                        hp={data.hp}
+                        str={data.str}
+                        weak={data.weak}
                         happy={dHappy}
                         />
                     )
