@@ -1,8 +1,8 @@
-import {mount, shallow} from 'enzyme'
 import {expect} from 'chai'
+import {store} from './App.test'
 
-describe('index.js', () => {
-    it('2+2 = 4', () => {
-        expect(2+2).to.equal(4)
-    })
+describe('is get empty redux cardStore', () => {
+    let storeData = store.getState()
+    expect(storeData.card.listAll.length).to.equal(0)
+    expect(storeData.card.curList.length).to.equal(0)
 })
