@@ -112,10 +112,10 @@ describe('<App />', () => {
         // add card
         wrapper.find(FaPlus).simulate('click')
         wrapper.find('.add-card').first().simulate('click')
-        expect(wrapper.props().store.getState().card.curList.length).to.equal(1)
+        expect(store.getState().card.curList.length).to.equal(1)
 
         wrapper.find('.add-card').first().simulate('click')
-        expect(wrapper.props().store.getState().card.curList.length).to.equal(2)
+        expect(store.getState().card.curList.length).to.equal(2)
         
         let wrapper2 = mount(
             <Provider store={store}>
@@ -134,9 +134,10 @@ describe('<ShowCurList />', () => {
                 <ShowCurList />
             </Provider>
         )
-        let curLen = wrapper.props().store.getState().card.curList.length
+        let curLen = store.getState().card.curList.length
         wrapper.find('.remove-card').first().simulate('click')
-        expect(wrapper.props().store.getState().card.curList.length).to.equal(curLen-1)
+        // expect(wrapper.props().store.getState().card.curList.length).to.equal(curLen-1)
+        expect(store.getState().card.curList.length).to.equal(curLen-1)
         expect(wrapper.find(Card).length).to.equal(curLen-1)
     })
 })

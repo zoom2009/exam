@@ -33,12 +33,12 @@ class ShowCurList extends Component {
                 }
               })
             }
-            let hp = e.hp > 100 ? 100 : e.hp
+            let hp = !isNaN(e.hp) ? e.hp > 100 ? 100 : e.hp : 0
             let weak = e.weaknesses? (e.weaknesses.length/e.attacks.length) : 0
             let data = {
               name: e.name,
               hp,
-              str: e.convertedRetreatCost * 50 > 100 ? 100 : e.convertedRetreatCost * 50,
+              str: e.convertedRetreatCost? e.convertedRetreatCost * 50 > 100 ? 100 : e.convertedRetreatCost * 50 : 0,
               atk,
               weak : weak*100,
               level: ((hp/10)+(atk/10)+10-weak)/5

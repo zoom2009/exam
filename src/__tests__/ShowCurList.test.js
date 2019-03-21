@@ -1,16 +1,11 @@
 import React from 'react'
-import {mount, shallow, render} from 'enzyme'
+import {mount} from 'enzyme'
 import {expect} from 'chai'
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
-import reducer from '../Redux/index'
 import ShowCurList from '../components/ShowCurList';
 import App from '../App';
 import { FaPlus } from 'react-icons/fa';
-import Modal from 'react-modal';
 import ModalComponent from '../components/ModalComponent';
-import Card from '../components/Card';
-import CardList from '../mock/cardList';
 import {store} from './App.test'
 
 describe('<ShowCurList />', () => {
